@@ -5,7 +5,7 @@ build:
       name: install maven
       code: |
         apt-get update
-        apt-get install maven
+        apt-get -y install maven
   - script:
       name: compile
       code: |
