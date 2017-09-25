@@ -190,7 +190,11 @@ public class MongoDataReader extends AbstractDataReader {
 				obj = resultObject.optString("result");
 
 				if (obj == null || obj.equals("")) {
-					obj = resultObject.optString("_firstBatch");
+					if (resultObject.isNull("_firstBatch")) {
+						obj = resultObject.optString("_batch");
+					} else {
+						obj = resultObject.optString("_firstBatch");
+					}
 				}
 
 				try {

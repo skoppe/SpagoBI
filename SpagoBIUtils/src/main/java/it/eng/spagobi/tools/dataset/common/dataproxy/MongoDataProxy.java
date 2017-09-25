@@ -124,16 +124,11 @@ public class MongoDataProxy extends AbstractDataProxy {
 			throw new SpagoBIRuntimeException("No autentication available yet");
 		}
 
-		try {
-			logger.debug("Connecting to mongodb");
-			mongoClient = new MongoClient(databaseUrl);
-
-		} catch (UnknownHostException e) {
-			logger.error("Error connectiong to the MongoClient", e);
-			throw new SpagoBIRuntimeException("Error connectiong to the MongoClient", e);
-		}
+		logger.debug("Connecting to mongodb");
+		mongoClient = new MongoClient(databaseUrl);
 
 		try {
+
 			logger.debug("Connecting to the db " + databaseName);
 			DB database = mongoClient.getDB(databaseName);
 
