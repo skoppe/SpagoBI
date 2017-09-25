@@ -9,7 +9,7 @@ build:
   - script:
       name: compile
       code: |
-        cd SpagoBI-5.2/spagobi-parent
+        cd spagobi-parent
         mvn package
   - script:
       name: fetch dependencies
