@@ -1,0 +1,100 @@
+box: bitnami/tomcat:7
+build:
+  steps:
+  - script:
+      name: install maven
+      code: |
+        apt-get update
+        apt-get install maven
+  - script:
+      name: compile
+      code: |
+        cd SpagoBI-5.2/spagobi-parent
+        mvn package
+  - script:
+      name: fetch dependencies
+      code: |
+        curl -o $WERCKER_OUTPUT_DIR/jar/commons-logging-1.1.1.jar http://central.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/commons-logging-api-1.1.jar http://central.maven.org/maven2/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/concurrent.jar https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/oswego-concurrent/concurrent/1.3.4/concurrent-1.3.4.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/foo-commonj.jar http://central.maven.org/maven2/org/codehaus/fabric3/api/commonj/1.1.1/commonj-1.1.1.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/geronimo-commonj_1.1_spec-1.0.jar http://central.maven.org/maven2/org/apache/geronimo/specs/geronimo-commonj_1.1_spec/1.0/geronimo-commonj_1.1_spec-1.0.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/hsqldb1_8_0_2.jar http://central.maven.org/maven2/org/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/iijdbc.jar http://central.maven.org/maven2/com/ingres/jdbc/iijdbc/10.0-4.0.6/iijdbc-10.0-4.0.6.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/mysql-connector-java-5.0.8-bin.jar http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/ojdbc5.jar http://maven.jahia.org/maven2/com/oracle/ojdbc5/11.2.0.3/ojdbc5-11.2.0.3.jar
+        curl -o $WERCKER_OUTPUT_DIR/jar/postgresql-9.3-1101.jdbc3.jar https://mvnrepository.com/artifact/org.postgresql/postgresql/42.1.4
+  - script:
+      name: Move war's to output dir
+      code: |
+        mkdir -p $WERCKER_OUTPUT_DIR/{war,jar,scripts}
+        cd $WERCKER_SOURCE_DIR
+        cp ./SpagoBI-5.2/SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIAccessibilityEngine.war
+        cp ./SpagoBI-5.2/SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIBirtReportEngine.war
+        cp ./SpagoBI-5.2/SpagoBIChartEngine/target/SpagoBIChartEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIChartEngine.war
+        cp ./SpagoBI-5.2/SpagoBICockpitEngine/target/SpagoBICockpitEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICockpitEngine.war
+        cp ./SpagoBI-5.2/SpagoBICommonJEngine/target/SpagoBICommonJEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICommonJEngine.war
+        cp ./SpagoBI-5.2/SpagoBIConsoleEngine/target/SpagoBIConsoleEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIConsoleEngine.war
+        cp ./SpagoBI-5.2/SpagoBIDataMiningEngine/target/SpagoBIDataMiningEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIDataMiningEngine.war
+        cp ./SpagoBI-5.2/SpagoBIGeoEngine/target/SpagoBIGeoEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoEngine.war
+        cp ./SpagoBI-5.2/SpagoBIGeoReportEngine/target/SpagoBIGeoReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoReportEngine.war
+        cp ./SpagoBI-5.2/SpagoBIJasperReportEngine/target/SpagoBIJasperReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJasperReportEngine.war
+        cp ./SpagoBI-5.2/SpagoBIJPivotEngine/target/SpagoBIJPivotEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJPivotEngine.war
+        cp ./SpagoBI-5.2/SpagoBIMobileEngine/target/SpagoBIMobileEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIMobileEngine.war
+        cp ./SpagoBI-5.2/SpagoBINetworkEngine/target/SpagoBINetworkEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBINetworkEngine.war
+        cp ./SpagoBI-5.2/SpagoBIProject/target/SpagoBI.war $WERCKER_OUTPUT_DIR/war/SpagoBI.war
+        cp ./SpagoBI-5.2/SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
+        cp ./SpagoBI-5.2/SpagoBISDK/target/SpagoBISDK.war $WERCKER_OUTPUT_DIR/war/SpagoBISDK.war
+        cp ./SpagoBI-5.2/SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
+        cp ./SpagoBI-5.2/SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
+        cp ./SpagoBI-5.2/SpagoBIWhatIfEngine/target/SpagoBIWhatIfEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIWhatIfEngine.war
+        cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
+        cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
+        cp ./docker/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
+        cp ./docker/MySQL_create_quartz_schema.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_quartz_schema.sql
+        cp ./docker/MySQL_create_social.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_social.sql
+
+deploy-docker-hub:
+  box: bitnami/tomcat:7
+  steps:
+  - script:
+      name: prep container
+      code: |
+        cp $WERCKER_SOURCE_DIR/scripts/server.xml /opt/bitnami/tomcat/server.xml.tmpl && /
+        cp $WERCKER_SOURCE_DIR/scripts/entrypoint.sh /opt/bitnami/tomcat/bin/entrypoint.sh && /
+        rm -rf /opt/bitnami/tomcat/webapps && /
+        mkdir -p /opt/bitnami/tomcat/webapps/{SpagoBIAccessibilityEngine,SpagoBIBirtReportEngine,SpagoBIChartEngine,SpagoBICockpitEngine,SpagoBICommonJEngine,SpagoBIConsoleEngine,SpagoBIDataMiningEngine,SpagoBIGeoEngine,SpagoBIGeoReportEngine,SpagoBIJasperReportEngine,SpagoBIJPivotEngine,SpagoBIMobileEngine,SpagoBINetworkEngine,SpagoBI,SpagoBIQbeEngine,SpagoBISDK,SpagoBISocialAnalysis,SpagoBITalendEngine,SpagoBIWhatIfEngine} && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIAccessibilityEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIAccessibilityEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIBirtReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIBirtReportEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIChartEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIChartEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBICockpitEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBICockpitEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBICommonJEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBICommonJEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIConsoleEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIConsoleEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIDataMiningEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIDataMiningEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIGeoEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIGeoEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIGeoReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIGeoReportEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIJasperReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIJasperReportEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIJPivotEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIJPivotEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIMobileEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIMobileEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBINetworkEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBINetworkEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBI.war -d /opt/bitnami/tomcat/webapps/SpagoBI && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIQbeEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIQbeEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBISDK.war -d /opt/bitnami/tomcat/webapps/SpagoBISDK && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBISocialAnalysis.war -d /opt/bitnami/tomcat/webapps/SpagoBISocialAnalysis && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBITalendEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBITalendEngine && /
+        unzip $WERCKER_SOURCE_DIR/war/SpagoBIWhatIfEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIWhatIfEngine && /
+        mkdir -p /opt/bitnami/tomcat/mysql && /
+        cp $WERCKER_SOURCE_DIR/scripts/MySQL_create.sql /opt/bitnami/tomcat/mysql/MySQL_create.sql && /
+        cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_quartz_schema.sql /opt/bitnami/tomcat/mysql/MySQL_create_quartz_schema.sql && /
+        cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_social.sql /opt/bitnami/tomcat/mysql/MySQL_create_social.sql
+
+  - internal/docker-push:
+      username: $DOCKERHUBUSER
+      password: $DOCKERHUBPASS
+      email: $DOCKERHUBEMAIL
+      repository: ctgbmst/spagobi
+      env: "SPAGOBI_DIRECTORY=/opt/bitnami/tomcat,MYSQL_SCRIPT_DIRECTORY=/opt/bitnami/tomcat/mysql"
+      ports: "8080"
+      entrypoint: "./entrypoint.sh"
+      cmd: "./startup.sh"
+      tag: "5.2"
