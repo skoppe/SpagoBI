@@ -1,4 +1,4 @@
-box: bitnami/tomcat:7
+box: ctgbmst/ctgb-build
 build:
   steps:
   - script:
