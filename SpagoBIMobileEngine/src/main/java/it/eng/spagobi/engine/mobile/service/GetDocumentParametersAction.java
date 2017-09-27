@@ -7,6 +7,7 @@ package it.eng.spagobi.engine.mobile.service;
 
 import it.eng.spagobi.analiticalmodel.document.bo.BIObject;
 import it.eng.spagobi.analiticalmodel.document.handlers.ExecutionInstance;
+import it.eng.spagobi.analiticalmodel.document.handlers.ParameterForExecution;
 import it.eng.spagobi.analiticalmodel.execution.service.GetParametersForExecutionAction;
 import it.eng.spagobi.behaviouralmodel.analyticaldriver.bo.BIObjectParameter;
 import it.eng.spagobi.behaviouralmodel.lov.bo.ILovDetail;
