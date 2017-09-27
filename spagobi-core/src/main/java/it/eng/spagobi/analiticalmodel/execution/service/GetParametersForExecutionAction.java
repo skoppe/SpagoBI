@@ -615,7 +615,7 @@ if(isSessionEnabled){
 	
 	
 	
-	public void getParameters() {
+	public List<ParameterForExecution> getParameters() {
 		logger.debug("IN");
 		ExecutionInstance executionInstance;
 
@@ -640,6 +640,7 @@ if(isSessionEnabled){
 		}
 
 		logger.debug("OUT");
+		return parametersForExecutionList;
 	}
 	
 
