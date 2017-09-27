@@ -7,6 +7,12 @@ build:
         apt-get update
         apt-get -y install maven
   - script:
+      name: maven cache
+      code: |
+        mkdir -p ~/.m2
+        mkdir -p $WERCKER_CACHE_DIR/.m2/repository
+        cp docker/maven-local-settings.xml ~/.m2/settings.xml
+  - script:
       name: compile
       code: |
         cd spagobi-parent
