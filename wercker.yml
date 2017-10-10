@@ -85,3 +85,4 @@ deploy-docker-hub:
       entrypoint: "./entrypoint.sh"
       cmd: "./startup.sh"
       tag: "5.2"
+      working-dir: "/opt/bitnami/tomcat/bin"
