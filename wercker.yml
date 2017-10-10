@@ -69,7 +69,7 @@ deploy-docker-hub:
         cp $WERCKER_SOURCE_DIR/scripts/server.xml /opt/bitnami/tomcat/server.xml.tmpl && \
         cp $WERCKER_SOURCE_DIR/scripts/entrypoint.sh /opt/bitnami/tomcat/bin/entrypoint.sh && \
         rm -rf /opt/bitnami/tomcat/webapps && \
-        cp -r $WERCKER_SOURCE_DIR/webapps /opt/bitname/tomcat && \
+        cp -r $WERCKER_SOURCE_DIR/webapps /opt/bitnami/tomcat && \
         mkdir -p /opt/bitnami/tomcat/mysql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create.sql /opt/bitnami/tomcat/mysql/MySQL_create.sql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_quartz_schema.sql /opt/bitnami/tomcat/mysql/MySQL_create_quartz_schema.sql && \
