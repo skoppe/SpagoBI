@@ -36,25 +36,25 @@ build:
       code: |
         mkdir -p $WERCKER_OUTPUT_DIR/{war,scripts}
         cd $WERCKER_SOURCE_DIR
-        cp ./SpagoBI-5.2/SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIAccessibilityEngine.war
-        cp ./SpagoBI-5.2/SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIBirtReportEngine.war
-        cp ./SpagoBI-5.2/SpagoBIChartEngine/target/SpagoBIChartEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIChartEngine.war
-        cp ./SpagoBI-5.2/SpagoBICockpitEngine/target/SpagoBICockpitEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICockpitEngine.war
-        cp ./SpagoBI-5.2/SpagoBICommonJEngine/target/SpagoBICommonJEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICommonJEngine.war
-        cp ./SpagoBI-5.2/SpagoBIConsoleEngine/target/SpagoBIConsoleEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIConsoleEngine.war
-        cp ./SpagoBI-5.2/SpagoBIDataMiningEngine/target/SpagoBIDataMiningEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIDataMiningEngine.war
-        cp ./SpagoBI-5.2/SpagoBIGeoEngine/target/SpagoBIGeoEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoEngine.war
-        cp ./SpagoBI-5.2/SpagoBIGeoReportEngine/target/SpagoBIGeoReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoReportEngine.war
-        cp ./SpagoBI-5.2/SpagoBIJasperReportEngine/target/SpagoBIJasperReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJasperReportEngine.war
-        cp ./SpagoBI-5.2/SpagoBIJPivotEngine/target/SpagoBIJPivotEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJPivotEngine.war
-        cp ./SpagoBI-5.2/SpagoBIMobileEngine/target/SpagoBIMobileEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIMobileEngine.war
-        cp ./SpagoBI-5.2/SpagoBINetworkEngine/target/SpagoBINetworkEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBINetworkEngine.war
-        cp ./SpagoBI-5.2/SpagoBIProject/target/SpagoBI.war $WERCKER_OUTPUT_DIR/war/SpagoBI.war
-        cp ./SpagoBI-5.2/SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
-        cp ./SpagoBI-5.2/SpagoBISDK/target/SpagoBISDK.war $WERCKER_OUTPUT_DIR/war/SpagoBISDK.war
-        cp ./SpagoBI-5.2/SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
-        cp ./SpagoBI-5.2/SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
-        cp ./SpagoBI-5.2/SpagoBIWhatIfEngine/target/SpagoBIWhatIfEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIWhatIfEngine.war
+        cp ./SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIAccessibilityEngine.war
+        cp ./SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIBirtReportEngine.war
+        cp ./SpagoBIChartEngine/target/SpagoBIChartEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIChartEngine.war
+        cp ./SpagoBICockpitEngine/target/SpagoBICockpitEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICockpitEngine.war
+        cp ./SpagoBICommonJEngine/target/SpagoBICommonJEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICommonJEngine.war
+        cp ./SpagoBIConsoleEngine/target/SpagoBIConsoleEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIConsoleEngine.war
+        cp ./SpagoBIDataMiningEngine/target/SpagoBIDataMiningEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIDataMiningEngine.war
+        cp ./SpagoBIGeoEngine/target/SpagoBIGeoEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoEngine.war
+        cp ./SpagoBIGeoReportEngine/target/SpagoBIGeoReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoReportEngine.war
+        cp ./SpagoBIJasperReportEngine/target/SpagoBIJasperReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJasperReportEngine.war
+        cp ./SpagoBIJPivotEngine/target/SpagoBIJPivotEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJPivotEngine.war
+        cp ./SpagoBIMobileEngine/target/SpagoBIMobileEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIMobileEngine.war
+        cp ./SpagoBINetworkEngine/target/SpagoBINetworkEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBINetworkEngine.war
+        cp ./SpagoBIProject/target/SpagoBI.war $WERCKER_OUTPUT_DIR/war/SpagoBI.war
+        cp ./SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
+        cp ./SpagoBISDK/target/SpagoBISDK.war $WERCKER_OUTPUT_DIR/war/SpagoBISDK.war
+        cp ./SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
+        cp ./SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
+        cp ./SpagoBIWhatIfEngine/target/SpagoBIWhatIfEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIWhatIfEngine.war
         cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
         cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
         cp ./docker/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
