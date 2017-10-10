@@ -5,7 +5,7 @@ build:
       name: install maven
       code: |
         apt-get update
-        apt-get -y install maven
+        apt-get -y install maven unzip
   - script:
       name: maven cache
       code: |
@@ -34,25 +34,26 @@ build:
   - script:
       name: Move war's to output dir
       code: |
-        mkdir -p $WERCKER_OUTPUT_DIR/{war,scripts}
+        mkdir -p $WERCKER_OUTPUT_DIR/{webapps,scripts}
         cd $WERCKER_SOURCE_DIR
-        cp ./SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIAccessibilityEngine.war
-        cp ./SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIBirtReportEngine.war
-        cp ./SpagoBIChartEngine/target/SpagoBIChartEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIChartEngine.war
-        cp ./SpagoBICockpitEngine/target/SpagoBICockpitEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICockpitEngine.war
-        cp ./SpagoBICommonJEngine/target/SpagoBICommonJEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBICommonJEngine.war
-        cp ./SpagoBIConsoleEngine/target/SpagoBIConsoleEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIConsoleEngine.war
-        cp ./SpagoBIDataMiningEngine/target/SpagoBIDataMiningEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIDataMiningEngine.war
-        cp ./SpagoBIGeoEngine/target/SpagoBIGeoEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoEngine.war
-        cp ./SpagoBIGeoReportEngine/target/SpagoBIGeoReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIGeoReportEngine.war
-        cp ./SpagoBIJasperReportEngine/target/SpagoBIJasperReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJasperReportEngine.war
-        cp ./SpagoBIJPivotEngine/target/SpagoBIJPivotEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIJPivotEngine.war
-        cp ./SpagoBIMobileEngine/target/SpagoBIMobileEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIMobileEngine.war
-        cp ./SpagoBINetworkEngine/target/SpagoBINetworkEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBINetworkEngine.war
-        cp ./SpagoBIProject/target/SpagoBI.war $WERCKER_OUTPUT_DIR/war/SpagoBI.war
-        cp ./SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
-        cp ./SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
-        cp ./SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
+        mkdir -p $WERCKER_OUTPUT_DIR/{SpagoBIAccessibilityEngine,SpagoBIBirtReportEngine,SpagoBIChartEngine,SpagoBICockpitEngine,SpagoBICommonJEngine,SpagoBIConsoleEngine,SpagoBIDataMiningEngine,SpagoBIGeoEngine,SpagoBIGeoReportEngine,SpagoBIJasperReportEngine,SpagoBIJPivotEngine,SpagoBIMobileEngine,SpagoBINetworkEngine,SpagoBI,SpagoBIQbeEngine,SpagoBISDK,SpagoBISocialAnalysis,SpagoBITalendEngine,SpagoBIWhatIfEngine}
+        unzip ./SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIAccessibilityEngine
+        unzip ./SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIBirtReportEngine
+        unzip ./SpagoBIChartEngine/target/SpagoBIChartEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIChartEngine
+        unzip ./SpagoBICockpitEngine/target/SpagoBICockpitEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBICockpitEngine
+        unzip ./SpagoBICommonJEngine/target/SpagoBICommonJEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBICommonJEngine
+        unzip ./SpagoBIConsoleEngine/target/SpagoBIConsoleEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIConsoleEngine
+        unzip ./SpagoBIDataMiningEngine/target/SpagoBIDataMiningEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIDataMiningEngine
+        unzip ./SpagoBIGeoEngine/target/SpagoBIGeoEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIGeoEngine
+        unzip ./SpagoBIGeoReportEngine/target/SpagoBIGeoReportEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIGeoReportEngine
+        unzip ./SpagoBIJasperReportEngine/target/SpagoBIJasperReportEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIJasperReportEngine
+        unzip ./SpagoBIJPivotEngine/target/SpagoBIJPivotEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIJPivotEngine
+        unzip ./SpagoBIMobileEngine/target/SpagoBIMobileEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIMobileEngine
+        unzip ./SpagoBINetworkEngine/target/SpagoBINetworkEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBINetworkEngine
+        unzip ./SpagoBIProject/target/SpagoBI.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBI
+        unzip ./SpagoBIQbeEngine/target/SpagoBIQbeEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIQbeEngine
+        unzip ./SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBISocialAnalysis
+        unzip ./SpagoBITalendEngine/target/SpagoBITalendEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBITalendEngine
         cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
         cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
         cp ./docker/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
@@ -68,26 +69,7 @@ deploy-docker-hub:
         cp $WERCKER_SOURCE_DIR/scripts/server.xml /opt/bitnami/tomcat/server.xml.tmpl && \
         cp $WERCKER_SOURCE_DIR/scripts/entrypoint.sh /opt/bitnami/tomcat/bin/entrypoint.sh && \
         rm -rf /opt/bitnami/tomcat/webapps && \
-        mkdir -p /opt/bitnami/tomcat/webapps/{SpagoBIAccessibilityEngine,SpagoBIBirtReportEngine,SpagoBIChartEngine,SpagoBICockpitEngine,SpagoBICommonJEngine,SpagoBIConsoleEngine,SpagoBIDataMiningEngine,SpagoBIGeoEngine,SpagoBIGeoReportEngine,SpagoBIJasperReportEngine,SpagoBIJPivotEngine,SpagoBIMobileEngine,SpagoBINetworkEngine,SpagoBI,SpagoBIQbeEngine,SpagoBISDK,SpagoBISocialAnalysis,SpagoBITalendEngine,SpagoBIWhatIfEngine} && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIAccessibilityEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIAccessibilityEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIBirtReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIBirtReportEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIChartEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIChartEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBICockpitEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBICockpitEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBICommonJEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBICommonJEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIConsoleEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIConsoleEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIDataMiningEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIDataMiningEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIGeoEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIGeoEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIGeoReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIGeoReportEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIJasperReportEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIJasperReportEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIJPivotEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIJPivotEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIMobileEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIMobileEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBINetworkEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBINetworkEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBI.war -d /opt/bitnami/tomcat/webapps/SpagoBI && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIQbeEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIQbeEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBISDK.war -d /opt/bitnami/tomcat/webapps/SpagoBISDK && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBISocialAnalysis.war -d /opt/bitnami/tomcat/webapps/SpagoBISocialAnalysis && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBITalendEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBITalendEngine && \
-        unzip $WERCKER_SOURCE_DIR/war/SpagoBIWhatIfEngine.war -d /opt/bitnami/tomcat/webapps/SpagoBIWhatIfEngine && \
+        cp $WERCKER_SOURCE_DIR/webapps /opt/bitname/tomcat && \
         mkdir -p /opt/bitnami/tomcat/mysql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create.sql /opt/bitnami/tomcat/mysql/MySQL_create.sql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_quartz_schema.sql /opt/bitnami/tomcat/mysql/MySQL_create_quartz_schema.sql && \
