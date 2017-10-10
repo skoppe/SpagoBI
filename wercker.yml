@@ -51,7 +51,6 @@ build:
         cp ./SpagoBINetworkEngine/target/SpagoBINetworkEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBINetworkEngine.war
         cp ./SpagoBIProject/target/SpagoBI.war $WERCKER_OUTPUT_DIR/war/SpagoBI.war
         cp ./SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
-        cp ./SpagoBISDK/target/SpagoBISDK.war $WERCKER_OUTPUT_DIR/war/SpagoBISDK.war
         cp ./SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
         cp ./SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
         cp ./SpagoBIWhatIfEngine/target/SpagoBIWhatIfEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIWhatIfEngine.war
