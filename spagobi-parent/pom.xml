@@ -65,7 +65,7 @@
  		<module>../SpagoBINetworkEngine</module>
  		<module>../SpagoBISocialAnalysis</module>
  		<module>../SpagoBITalendEngine</module>
-<!--		<module>../SpagoBIWhatIfEngine</module> -->
+		<module>../SpagoBIWhatIfEngine</module> 
 	</modules>
 
 
