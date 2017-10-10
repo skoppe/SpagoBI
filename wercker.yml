@@ -53,7 +53,6 @@ build:
         cp ./SpagoBIQbeEngine/target/SpagoBIQbeEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIQbeEngine.war
         cp ./SpagoBISocialAnalysis/target/SpagoBISocialAnalysis.war $WERCKER_OUTPUT_DIR/war/SpagoBISocialAnalysis.war
         cp ./SpagoBITalendEngine/target/SpagoBITalendEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBITalendEngine.war
-        cp ./SpagoBIWhatIfEngine/target/SpagoBIWhatIfEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIWhatIfEngine.war
         cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
         cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
         cp ./docker/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
