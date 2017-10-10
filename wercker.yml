@@ -20,6 +20,7 @@ build:
   - script:
       name: fetch dependencies
       code: |
+        mkdir -p $WERCKER_OUTPUT_DIR/jar
         curl -o $WERCKER_OUTPUT_DIR/jar/commons-logging-1.1.1.jar http://central.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar
         curl -o $WERCKER_OUTPUT_DIR/jar/commons-logging-api-1.1.jar http://central.maven.org/maven2/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar
         curl -o $WERCKER_OUTPUT_DIR/jar/concurrent.jar https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/oswego-concurrent/concurrent/1.3.4/concurrent-1.3.4.jar
@@ -33,7 +34,7 @@ build:
   - script:
       name: Move war's to output dir
       code: |
-        mkdir -p $WERCKER_OUTPUT_DIR/{war,jar,scripts}
+        mkdir -p $WERCKER_OUTPUT_DIR/{war,scripts}
         cd $WERCKER_SOURCE_DIR
         cp ./SpagoBI-5.2/SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIAccessibilityEngine.war
         cp ./SpagoBI-5.2/SpagoBIBirtReportEngine/target/SpagoBIBirtReportEngine.war $WERCKER_OUTPUT_DIR/war/SpagoBIBirtReportEngine.war
