@@ -88,7 +88,7 @@ deploy-docker-hub:
       password: $DOCKERHUBPASS
       email: $DOCKERHUBEMAIL
       repository: ctgbmst/spagobi
-      env: "SPAGOBI_DIRECTORY=/opt/bitnami/tomcat", "MYSQL_SCRIPT_DIRECTORY=/opt/bitnami/tomcat/mysql"
+      env: "SPAGOBI_DIRECTORY=/opt/bitnami/tomcat"
       ports: "8080"
       entrypoint: "./entrypoint.sh"
       cmd: "catalina.sh run"
