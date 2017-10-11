@@ -64,25 +64,33 @@ deploy-docker-hub:
   box: bitnami/tomcat:7
   steps:
   - script:
+      name: install mysql client
+      code: |
+        apt-get update && \
+        apt-get -y install mysql-client && \
+        apt-get remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && rm -rf /var/lib/apt/lists/*
+  - script:
       name: prep container
       code: |
         cp $WERCKER_SOURCE_DIR/scripts/server.xml /opt/bitnami/tomcat/server.xml.tmpl && \
         cp $WERCKER_SOURCE_DIR/scripts/entrypoint.sh /opt/bitnami/tomcat/bin/entrypoint.sh && \
+        chmod +x /opt/bitnami/tomcat/bin/entrypoint.sh && \
         rm -rf /opt/bitnami/tomcat/webapps && \
         cp -r $WERCKER_SOURCE_DIR/webapps /opt/bitnami/tomcat && \
         mkdir -p /opt/bitnami/tomcat/mysql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create.sql /opt/bitnami/tomcat/mysql/MySQL_create.sql && \
         cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_quartz_schema.sql /opt/bitnami/tomcat/mysql/MySQL_create_quartz_schema.sql && \
-        cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_social.sql /opt/bitnami/tomcat/mysql/MySQL_create_social.sql
+        cp $WERCKER_SOURCE_DIR/scripts/MySQL_create_social.sql /opt/bitnami/tomcat/mysql/MySQL_create_social.sql && \
+        cp $WERCKER_SOURCE_DIR/jar/*.jar /opt/bitnami/tomcat/lib
 
   - internal/docker-push:
       username: $DOCKERHUBUSER
       password: $DOCKERHUBPASS
       email: $DOCKERHUBEMAIL
       repository: ctgbmst/spagobi
-      env: "SPAGOBI_DIRECTORY=/opt/bitnami/tomcat,MYSQL_SCRIPT_DIRECTORY=/opt/bitnami/tomcat/mysql"
+      env: "SPAGOBI_DIRECTORY=/opt/bitnami/tomcat","MYSQL_SCRIPT_DIRECTORY=/opt/bitnami/tomcat/mysql"
       ports: "8080"
       entrypoint: "./entrypoint.sh"
-      cmd: "./startup.sh"
+      cmd: "catalina.sh run"
       tag: "5.2"
       working-dir: "/opt/bitnami/tomcat/bin"
