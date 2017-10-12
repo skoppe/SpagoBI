@@ -57,9 +57,9 @@ build:
         unzip ./SpagoBITalendEngine/target/SpagoBITalendEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBITalendEngine
         cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
         cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
-        cp ./docker/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
-        cp ./docker/MySQL_create_quartz_schema.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_quartz_schema.sql
-        cp ./docker/MySQL_create_social.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_social.sql
+        cp ./SpagoBIDatabaseScripts/mysql/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
+        cp ./SpagoBIDatabaseScripts/mysql/MySQL_create_quartz_schema.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_quartz_schema.sql
+        cp ./SpagoBIDatabaseScripts/mysql/MySQL_create_social.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_social.sql
 
 deploy-docker-hub:
   box: skoppe/spagobi
