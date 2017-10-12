@@ -30,7 +30,7 @@ build:
         curl -o $WERCKER_OUTPUT_DIR/jar/iijdbc.jar http://central.maven.org/maven2/com/ingres/jdbc/iijdbc/10.0-4.0.6/iijdbc-10.0-4.0.6.jar
         curl -o $WERCKER_OUTPUT_DIR/jar/mysql-connector-java-5.0.8-bin.jar http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar
         curl -o $WERCKER_OUTPUT_DIR/jar/ojdbc5.jar http://maven.jahia.org/maven2/com/oracle/ojdbc5/11.2.0.3/ojdbc5-11.2.0.3.jar
-        curl -o $WERCKER_OUTPUT_DIR/jar/postgresql-9.3-1101.jdbc3.jar https://mvnrepository.com/artifact/org.postgresql/postgresql/42.1.4
+        curl -o $WERCKER_OUTPUT_DIR/jar/postgresql-9.3-1101.jdbc3.jar http://central.maven.org/maven2/org/postgresql/postgresql/9.3-1101-jdbc3/postgresql-9.3-1101-jdbc3.jar
   - script:
       name: Move war's to output dir
       code: |
