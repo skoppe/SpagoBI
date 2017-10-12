@@ -61,7 +61,7 @@ build:
         cp ./docker/MySQL_create_social.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_social.sql
 
 deploy-docker-hub:
-  box: skoppe/spagobi-runtime-base
+  box: skoppe/spagobi
   steps:
   - script:
       name: prep container
