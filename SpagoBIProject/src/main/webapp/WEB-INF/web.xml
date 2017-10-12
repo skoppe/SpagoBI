@@ -87,10 +87,10 @@
  ${enable.cas.start} END-CAS -->
  
  
- 	<filter>
+ 	<!-- <filter>
 		<filter-name>OAuthFilter</filter-name>
 		<filter-class>it.eng.spagobi.security.oauth2.OAuth2Filter</filter-class>
-	</filter>
+	</filter> -->
     
   	<!-- This filter tries to create the user profile object before AdapterHTTP servlet execution -->
  	<filter>
@@ -126,10 +126,10 @@
   </filter-mapping>  
  ${enable.cas.start} END-CAS --> 
 
-	<filter-mapping>
+	<!-- <filter-mapping>
 		<filter-name>OAuthFilter</filter-name>
 		<url-pattern>/servlet/AdapterHTTP</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 	<filter-mapping>
 		<filter-name>ProfileFilter</filter-name>

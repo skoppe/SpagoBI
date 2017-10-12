@@ -4,7 +4,7 @@ set -e
 if [[ -z "$PUBLIC_ADDRESS" ]]; then
         #get the address of container
         #example : default via 172.17.42.1 dev eth0 172.17.0.0/16 dev eth0 proto kernel scope link src 172.17.0.109
-        PUBLIC_ADDRESS="http://`hostname -I`:8080"
+        PUBLIC_ADDRESS="http://`hostname -I | tr -d ' '`:8080"
 fi
 
 if [ -n "$DB_ENV_MYSQL_DATABASE" ]; then
