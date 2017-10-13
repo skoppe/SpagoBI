@@ -230,16 +230,10 @@ public class MongoDataReader extends AbstractDataReader {
 	private void setFieldType(IField field, IFieldMetaData fieldMeta, String fieldValue) {
 		// if one field of the collection is not number the type
 		// is String
-		if (fieldMeta.getType() == null || !fieldMeta.getType().equals(String.class)) {
-			try {
-				Object value = new Double(fieldValue);
-				fieldMeta.setType(Double.class);
-				logger.debug("Double type");
-				field.setValue(value);
-			} catch (Exception e) {
-				fieldMeta.setType(String.class);
-				logger.debug("String type");
-			}
+		if (fieldMeta.getType() == null)
+		{
+			fieldMeta.setType(String.class);
+			logger.debug("String type");
 		}
 	}
 
