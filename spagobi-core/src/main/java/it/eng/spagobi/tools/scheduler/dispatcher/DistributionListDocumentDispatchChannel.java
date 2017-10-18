@@ -176,7 +176,7 @@ public class DistributionListDocumentDispatchChannel implements IDocumentDispatc
 			Properties props = new Properties();
 			props.put("mail.smtp.host", smtphost);
 			props.put("mail.smtp.port", Integer.toString(smptPort));
-			if (smptPort == "587")
+			if (smptPort == 587)
 				props.put("mail.smtp.starttls.enable", "true");
 
 			Session session = null;
