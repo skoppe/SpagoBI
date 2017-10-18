@@ -242,6 +242,7 @@ public class DistributionListDocumentDispatchChannel implements IDocumentDispatc
 			mp.addBodyPart(mbp2);
 			// add the Multipart to the message
 			msg.setContent(mp);
+
 			// send message
 	    	if ((smtpssl.equals("true")) && (!StringUtilities.isEmpty(user)) &&  (!StringUtilities.isEmpty(pass))){
 	    		//USE SSL Transport comunication with SMTPS
@@ -249,6 +250,13 @@ public class DistributionListDocumentDispatchChannel implements IDocumentDispatc
 		    	transport.connect(smtphost,smptPort,user,pass);
 		    	transport.sendMessage(msg, msg.getAllRecipients());
 		    	transport.close(); 
+	    	} else if (!StringUtilities.isEmpty(user) && !StringUtilities.isEmpty(pass))
+	    	{
+	    		//USE Transport comunication with SMTP
+		    	Transport transport = session.getTransport("smtp");
+		    	transport.connect(smtphost,smptPort,user,pass);
+		    	transport.sendMessage(msg, msg.getAllRecipients());
+		    	transport.close(); 	    		
 	    	}
 	    	else {
 	    		//Use normal SMTP
