@@ -130,7 +130,7 @@ public class MongoDataProxy extends AbstractDataProxy {
 			DB database = mongoClient.getDB(databaseName);
 
 			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
-				if (!db.authenticate(dataSource.getUser(), dataSource.getPwd().toCharArray()))
+				if (!database.authenticate(dataSource.getUser(), dataSource.getPwd().toCharArray()))
 					throw new SpagoBIRuntimeException("Failed to authenticate");
 			}
 
