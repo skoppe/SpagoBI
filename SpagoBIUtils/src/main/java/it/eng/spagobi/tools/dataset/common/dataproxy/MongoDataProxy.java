@@ -15,6 +15,7 @@ import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 
 public class MongoDataProxy extends AbstractDataProxy {
 
@@ -118,7 +119,19 @@ public class MongoDataProxy extends AbstractDataProxy {
 
 		try {
 			logger.debug("Connecting to mongodb");
-			mongoClient = new MongoClient(databaseUrl);
+			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
+				List<MongoCredential> creds = new List<MongoCredential>();
+				creds.add(MongoCredential.createMongoCRCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray()));
+
+				int portStart = clientUrl.lastIndexOf(":");
+				String host = clientUrl.substring(0, portStart);
+				int port = Integer.parseInt(clientUrl.substring(portStart + 1));
+
+				mongoClient = new MongoClient(new ServerAddress(host, port), creds);
+			} else
+			{
+				mongoClient = new MongoClient(databaseUrl);
+			}
 		} catch (UnknownHostException e) {
 			logger.error("Error connectiong to the MongoClient", e);
 			throw new SpagoBIRuntimeException("Error connectiong to the MongoClient", e);
@@ -128,11 +141,6 @@ public class MongoDataProxy extends AbstractDataProxy {
 
 			logger.debug("Connecting to the db " + databaseName);
 			DB database = mongoClient.getDB(databaseName);
-
-			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
-				if (!database.authenticate(dataSource.getUser(), dataSource.getPwd().toCharArray()))
-					throw new SpagoBIRuntimeException("Failed to authenticate");
-			}
 
 			logger.debug("Executing the statement" + statement);
 			result = database.doEval(getDecoredStatement());
