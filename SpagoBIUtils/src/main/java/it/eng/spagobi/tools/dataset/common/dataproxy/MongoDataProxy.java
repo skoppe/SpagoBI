@@ -8,6 +8,8 @@ import it.eng.spagobi.tools.datasource.bo.IDataSource;
 import it.eng.spagobi.utilities.exceptions.SpagoBIRuntimeException;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -120,7 +122,7 @@ public class MongoDataProxy extends AbstractDataProxy {
 		try {
 			logger.debug("Connecting to mongodb");
 			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
-				List<MongoCredential> creds = new List<MongoCredential>();
+				List<MongoCredential> creds = new ArrayList<MongoCredential>();
 				creds.add(MongoCredential.createMongoCRCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray()));
 
 				int portStart = clientUrl.lastIndexOf(":");
