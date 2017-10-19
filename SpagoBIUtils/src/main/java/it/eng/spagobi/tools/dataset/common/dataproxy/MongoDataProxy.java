@@ -116,14 +116,6 @@ public class MongoDataProxy extends AbstractDataProxy {
 		logger.debug("Connection URL: " + databaseUrl);
 		logger.debug("Database name: " + databaseName);
 
-		if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
-			MongoCredential credential = MongoCredential.createMongoCRCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray());
-			// mongoClient = new MongoClient(new ServerAddress(clientUrl),
-			// Arrays.asList(credential));
-			logger.error("No autentication available yet");
-			throw new SpagoBIRuntimeException("No autentication available yet");
-		}
-
 		try {
 			logger.debug("Connecting to mongodb");
 			mongoClient = new MongoClient(databaseUrl);
@@ -136,6 +128,11 @@ public class MongoDataProxy extends AbstractDataProxy {
 
 			logger.debug("Connecting to the db " + databaseName);
 			DB database = mongoClient.getDB(databaseName);
+
+			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
+				if (!db.authenticate(dataSource.getUser(), dataSource.getPwd().toCharArray()))
+					throw new SpagoBIRuntimeException("Failed to authenticate");
+			}
 
 			logger.debug("Executing the statement" + statement);
 			result = database.doEval(getDecoredStatement());
