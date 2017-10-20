@@ -125,9 +125,9 @@ public class MongoDataProxy extends AbstractDataProxy {
 				List<MongoCredential> creds = new ArrayList<MongoCredential>();
 				creds.add(MongoCredential.createMongoCRCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray()));
 
-				int portStart = clientUrl.lastIndexOf(":");
-				String host = clientUrl.substring(0, portStart);
-				int port = Integer.parseInt(clientUrl.substring(portStart + 1));
+				int portStart = databaseUrl.lastIndexOf(":");
+				String host = databaseUrl.substring(0, portStart);
+				int port = Integer.parseInt(databaseUrl.substring(portStart + 1));
 
 				mongoClient = new MongoClient(new ServerAddress(host, port), creds);
 			} else
