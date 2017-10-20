@@ -119,24 +119,19 @@ public class MongoDataProxy extends AbstractDataProxy {
 		logger.debug("Connection URL: " + databaseUrl);
 		logger.debug("Database name: " + databaseName);
 
-		try {
-			logger.debug("Connecting to mongodb");
-			if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
-				List<MongoCredential> creds = new ArrayList<MongoCredential>();
-				creds.add(MongoCredential.createCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray()));
+		logger.debug("Connecting to mongodb");
+		if (dataSource.getUser() != null && dataSource.getPwd() != null && dataSource.getUser().length() > 0 && dataSource.getPwd().length() > 0) {
+			List<MongoCredential> creds = new ArrayList<MongoCredential>();
+			creds.add(MongoCredential.createCredential(dataSource.getUser(), databaseName, dataSource.getPwd().toCharArray()));
 
-				int portStart = databaseUrl.lastIndexOf(":");
-				String host = databaseUrl.substring(0, portStart);
-				int port = Integer.parseInt(databaseUrl.substring(portStart + 1));
+			int portStart = databaseUrl.lastIndexOf(":");
+			String host = databaseUrl.substring(0, portStart);
+			int port = Integer.parseInt(databaseUrl.substring(portStart + 1));
 
-				mongoClient = new MongoClient(new ServerAddress(host, port), creds);
-			} else
-			{
-				mongoClient = new MongoClient(databaseUrl);
-			}
-		} catch (UnknownHostException e) {
-			logger.error("Error connectiong to the MongoClient", e);
-			throw new SpagoBIRuntimeException("Error connectiong to the MongoClient", e);
+			mongoClient = new MongoClient(new ServerAddress(host, port), creds);
+		} else
+		{
+			mongoClient = new MongoClient(databaseUrl);
 		}
 
 		try {
