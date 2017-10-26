@@ -35,7 +35,7 @@ build:
   - script:
       name: Move war's to output dir
       code: |
-        mkdir -p $WERCKER_OUTPUT_DIR/{webapps,scripts,mics}
+        mkdir -p $WERCKER_OUTPUT_DIR/{webapps,scripts,misc}
         cd $WERCKER_SOURCE_DIR
         mkdir -p $WERCKER_OUTPUT_DIR/{SpagoBIAccessibilityEngine,SpagoBIBirtReportEngine,SpagoBIChartEngine,SpagoBICockpitEngine,SpagoBICommonJEngine,SpagoBIConsoleEngine,SpagoBIDataMiningEngine,SpagoBIGeoEngine,SpagoBIGeoReportEngine,SpagoBIJasperReportEngine,SpagoBIJPivotEngine,SpagoBIMobileEngine,SpagoBINetworkEngine,SpagoBI,SpagoBIQbeEngine,SpagoBISDK,SpagoBISocialAnalysis,SpagoBITalendEngine,SpagoBIWhatIfEngine}
         unzip ./SpagoBIAccessibilityEngine/target/SpagoBIAccessibilityEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBIAccessibilityEngine
@@ -57,9 +57,9 @@ build:
         unzip ./SpagoBITalendEngine/target/SpagoBITalendEngine.war -d $WERCKER_OUTPUT_DIR/webapps/SpagoBITalendEngine
         cp ./docker/entrypoint.sh $WERCKER_OUTPUT_DIR/scripts/entrypoint.sh
         cp ./docker/server.xml $WERCKER_OUTPUT_DIR/scripts/server.xml
-        cp ./docker/cacerts $WERCKER_OUTPUT_DIR/mics/cacerts
-        cp ./docker/java.security $WERCKER_OUTPUT_DIR/mics/java.security
-        cp ./docker/bcprov-jdk15on-158.jar $WERCKER_OUTPUT_DIR/mics/bcprov-jdk15on-158.jar
+        cp ./docker/cacerts $WERCKER_OUTPUT_DIR/misc/cacerts
+        cp ./docker/java.security $WERCKER_OUTPUT_DIR/misc/java.security
+        cp ./docker/bcprov-jdk15on-158.jar $WERCKER_OUTPUT_DIR/misc/bcprov-jdk15on-158.jar
         cp ./SpagoBIDatabaseScripts/mysql/MySQL_create.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create.sql
         cp ./SpagoBIDatabaseScripts/mysql/MySQL_create_quartz_schema.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_quartz_schema.sql
         cp ./SpagoBIDatabaseScripts/mysql/MySQL_create_social.sql $WERCKER_OUTPUT_DIR/scripts/MySQL_create_social.sql
