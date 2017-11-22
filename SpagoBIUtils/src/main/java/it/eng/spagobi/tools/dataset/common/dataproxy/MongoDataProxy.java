@@ -175,11 +175,18 @@ public class MongoDataProxy extends AbstractDataProxy {
 		}
 
 		/**
-		 * The result is not a cursor (a document or a list of documents)
+		 * The result is not a cursor
 		 */
-		else if (isSingleDocumentQuery() || isAggregatedQuery()) {
+		else if (isSingleDocumentQuery()) {
 			decored = " function(){ " + overridenToJSONObject.toString() + " " + this.statement + " return query};";
 		}
+
+		// /**
+		//  * The result is a cursor
+		//  */
+		// else if (isAggregatedQuery()) {
+		// 	decored = " function(){ " + overridenToJSONObject.toString() + " " + this.statement + " return query.toArray();};";
+		// }
 
 		/**
 		 * The result is a cursor so navigate it using decorateFunction

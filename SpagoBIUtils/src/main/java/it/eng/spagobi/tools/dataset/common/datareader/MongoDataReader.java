@@ -185,27 +185,7 @@ public class MongoDataReader extends AbstractDataReader {
 			if (isAggregatedQuery()) {
 				logger.debug("It is an aggregation");
 
-				JSONObject resultObject = new JSONObject(obj);
-
-				obj = resultObject.optString("result");
-
-				if (obj == null || obj.equals("")) {
-					if (resultObject.isNull("_firstBatch")) {
-						obj = resultObject.optString("_batch");
-					} else {
-						obj = resultObject.optString("_firstBatch");
-					}
-				}
-
-				try {
-					logger.debug("The result of the aggregation is an array");
-					resultArray = new JSONArray(obj);
-				} catch (Exception e) {
-					logger.debug("The result of the aggregation is an object");
-					resultArray = new JSONArray();
-					resultObject = new JSONObject(obj);
-					resultArray.put(resultObject);
-				}
+				resultArray = new JSONArray(obj);
 
 			} else {
 				try {
