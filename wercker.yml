@@ -95,3 +95,4 @@ deploy-docker-hub:
       cmd: "catalina.sh run"
       tag: latest, 5.2
       working-dir: "/opt/bitnami/tomcat/bin"
+      registry: https://registry.hub.docker.com/v2
