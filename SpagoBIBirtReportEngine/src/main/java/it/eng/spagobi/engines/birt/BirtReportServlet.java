@@ -75,6 +75,7 @@ import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.IRunTask;
 import org.eclipse.birt.report.engine.api.IScalarParameterDefn;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
+import org.eclipse.birt.report.engine.api.DocxRenderOption;
 import org.eclipse.birt.report.engine.dataextraction.CSVDataExtractionOption;
 import org.eclipse.birt.report.engine.dataextraction.ICSVDataExtractionOption;
 import org.eclipse.birt.report.utility.BirtUtility;
@@ -640,7 +641,10 @@ public class BirtReportServlet extends HttpServlet {
 			logger.debug(" Output format parameter is CSV. Create document obj .");
 			prepareCSVRender(reportParams, request, design, userId, documentId, profile, kpiUrl, response);
 			return;
-
+		} else if (outputFormat != null && outputFormat.equalsIgnoreCase("docx")) {
+			renderOption = new DocxRenderOption();
+			response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+			response.setHeader("content-disposition", "inline; filename=" + templateFileName + ".docx");
 		} else {
 			logger.debug(" Output format parameter not set or not valid. Using default output format: HTML.");
 			outputFormat = IBirtConstants.HTML_RENDER_FORMAT;

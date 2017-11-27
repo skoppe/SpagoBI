@@ -128,6 +128,10 @@ Ext.extend(Sbi.execution.toolbar.ExportersMenu, Ext.menu.Menu, {
 			description: LN('sbi.execution.docExport')
 			, iconCls: 'icon-rtf' 
 		},
+		'DOCX' : {
+			description: LN('sbi.execution.docxExport')
+			, iconCls: 'icon-rtf' 
+		},
 		'CSV' : {
 			description: LN('sbi.execution.CsvExport')
 			, iconCls: 'icon-csv' 
@@ -176,6 +180,7 @@ Ext.extend(Sbi.execution.toolbar.ExportersMenu, Ext.menu.Menu, {
 			, 'XLSX' : function() { this.exportReportTo('XLSX'); }	
 			, 'RTF' : function() { this.exportReportTo('RTF'); }
 			, 'DOC' : function() { this.exportReportTo('DOC'); }
+			, 'DOCX' : function() { this.exportReportTo('DOCX'); }
 			, 'CSV' : function() { this.exportReportTo('CSV'); }
 			, 'XML' : function() { this.exportReportTo('XML'); }
 			, 'JPG' : function() { this.exportReportTo('JPG'); }
